@@ -69,11 +69,21 @@ const persona = new Persona({
 
 // persona.save();
 
+//Consultar datos de un documento
 Fruta.find((err, fruits) => {
     if(err){
         console.log(err);
     } else{        
         fruits.forEach(fruit => console.log(fruit.name));
-        mongoose.connection.close();
+        // mongoose.connection.close();
     }
 });
+
+//Actualizar datos de un documento
+Fruta.updateOne({_id: "622ad8cee318a1358c0d99da"}, {name: "Sandia"}, (err) =>{
+    if (err){
+        console.log(err);
+    } else{
+        console.log('Successfully updated');
+    }
+})
