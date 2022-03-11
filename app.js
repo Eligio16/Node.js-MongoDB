@@ -34,17 +34,17 @@ const melocoton = new Fruta({
 //Almacena un objeto
 // melocoton.save();
 
-// const pera = new Fruta({
-//     name: "Pera",
-//     rating: 6,
-//     review: "Pretty suave as a fruit"
-// });
+const pera = new Fruta({
+    name: "Pera",
+    rating: 6,
+    review: "Pretty suave as a fruit"
+});
 
-// const fresa = new Fruta({
-//     name: "Fresa",
-//     rating: 10,
-//     review: "a small fruit"
-// });
+const fresa = new Fruta({
+    name: "Fresa",
+    rating: 10,
+    review: "a small fruit"
+});
 
 //Almacena varios documentos
 // Fruta.insertMany([pera, fresa], (err) => {
@@ -69,21 +69,35 @@ const persona = new Persona({
 
 // persona.save();
 
+
 //Consultar datos de un documento
 Fruta.find((err, fruits) => {
     if(err){
         console.log(err);
     } else{        
         fruits.forEach(fruit => console.log(fruit.name));
-        // mongoose.connection.close();
+        }
+});
+
+
+//Actualizar datos de un documento
+// Fruta.updateOne({_id: "622ad8cee318a1358c0d99da"}, {name: "Sandia"}, (err) =>{
+    //     if (err){
+        //         console.log(err);
+        //     } else{
+            //         console.log('Successfully updated');
+            //     }
+            // })
+            
+// Eliminar un elemento
+Fruta.deleteOne({name: 'Melotocon'}, (err)=>{
+    if(err){
+        console.log(err);
+    } else{
+        console.log('Successfully deleted');
+        mongoose.connection.close();
     }
 });
 
-//Actualizar datos de un documento
-Fruta.updateOne({_id: "622ad8cee318a1358c0d99da"}, {name: "Sandia"}, (err) =>{
-    if (err){
-        console.log(err);
-    } else{
-        console.log('Successfully updated');
-    }
-})
+            
+            
