@@ -10,34 +10,41 @@ async function main(){
 
 // En mongo todo deriva de un esquema (constructor)
 const frutaSchema = new mongoose.Schema({
-    name: String,
-    rating: Number,
+    name: {
+        type: String,
+        required: [true]
+    },
+    rating: {
+        type: Number,
+        min: 1,
+        max: 10
+    },
     review: String
 });
 
 // Un modelo es una clase con la que se contruyen documentos
 const Fruta = mongoose.model('Fruta', frutaSchema);
 
-const fruta = new Fruta({
-    name: "Manzana",
-    rating: 7,
+const melocoton = new Fruta({
+    name: "Melotocon",
+    rating: 8,
     review: "Pretty solid as a fruit"
 })
 
 //Almacena un objeto
-// fruta.save();
+// melocoton.save();
 
-const pera = new Fruta({
-    name: "Pera",
-    rating: 6,
-    review: "Pretty suave as a fruit"
-})
+// const pera = new Fruta({
+//     name: "Pera",
+//     rating: 6,
+//     review: "Pretty suave as a fruit"
+// });
 
-const fresa = new Fruta({
-    name: "Fresa",
-    rating: 10,
-    review: "a small fruit"
-})
+// const fresa = new Fruta({
+//     name: "Fresa",
+//     rating: 10,
+//     review: "a small fruit"
+// });
 
 //Almacena varios documentos
 // Fruta.insertMany([pera, fresa], (err) => {
@@ -65,7 +72,8 @@ const persona = new Persona({
 Fruta.find((err, fruits) => {
     if(err){
         console.log(err);
-    } else{
-        console.log(fruits);
+    } else{        
+        fruits.forEach(fruit => console.log(fruit.name));
+        mongoose.connection.close();
     }
 });
